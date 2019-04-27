@@ -9,7 +9,7 @@ chrome.runtime.onMessage.addListener(function (request, sender) {
        // message.innerText = request.source;
         //console.log(message.innerText);
         //message.innerHTML = "Success!";
-       message.innerHTML = "Ready? " + tldr(request.source);
+       message.innerHTML = tldr(request.source);
     }
 });
 
@@ -29,7 +29,7 @@ function tldr(html) {
     var dataInSentences = html.match( /[^\.!\?]+[\.!\?]+/g );
 
     var freqMap = {}; //stores words with the # of times they're said
-    var topSentence = "default"; //can be expanded to a list of sentences for TLDR to output
+    var topSentence = "<ul>"; //can be expanded to a list of sentences for TLDR to output
     var topValue = -1;
 
     for(var i = 0; i < wordData.length; i++) { //fills map with words and the frequency of them
@@ -45,6 +45,8 @@ function tldr(html) {
         }
     }
 
+    var sentenceRankings = [];
+
     //check words in sentence, find point total
     //sentence with highest point total goes in TLDR
     for(var i = 0; i < dataInSentences.length; i++) {
@@ -58,13 +60,28 @@ function tldr(html) {
                     sentencePointTotal += freqMap[listOfWords[j]]; //if the word is in our map, assign freq as a point
                 }
             }
-            if (topValue === -1 || sentencePointTotal > topValue) { //there has never been a topSentence assigned or there is a higher point total sentence
-                topValue = sentencePointTotal;
-                topSentence = dataInSentences[i];
-            }
+            sentenceRankings.push([dataInSentences[i], sentencePointTotal, i]);
         }
     }
-    return(topSentence);
+
+
+
+    sentenceRankings = sentenceRankings.sort(sortByRating);
+    sentenceRankings = sentenceRankings.slice(0,5);
+    sentenceRankings = sentenceRankings.sort(sortByChrono);
+
+    sentenceRankings.forEach(function (value) { topSentence += "<li>"+value[0]+"</li>" })
+    return(topSentence + "</ul>");
     //Console.log(freqMap);
+}
+
+
+
+function sortByRating(s1, s2){
+    return s2[1] - s1[1];
+}
+
+function sortByChrono(s1, s2) {
+    return s1[2] - s2[2];
 }
 
