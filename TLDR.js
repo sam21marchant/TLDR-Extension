@@ -8,6 +8,19 @@ document.addEventListener('DOMContentLoaded', function() {
     })
 });
 
+function getSiteData(url) {
+    var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+    var request = new XMLHttpRequest();
+    request.onreadystatechange=function() {
+        if (this.readyState == 4 && this.status == 200) {
+            tldr(this.responseText)
+            //var webData = this.response
+        }
+    };
+    request.open("GET", url, true);
+    request.send();
+}
+
 function tldr(html) {
     var htmlData = ["the", "big", "dog", "dog"]; //break up incoming data, split by space to get list of words
     var freqMap = new Map([]);
