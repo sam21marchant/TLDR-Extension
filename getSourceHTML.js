@@ -6,7 +6,7 @@ function getP(document_root){
     var pElements = document_root.querySelectorAll("p");
     pElements.forEach(function (value) { ret += value.innerHTML + '\n'; })
 
-    return ret;
+    return ret.replace(/(<([^>]+)>)/ig,"");
 }
 
 

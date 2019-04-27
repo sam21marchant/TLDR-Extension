@@ -5,7 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 chrome.runtime.onMessage.addListener(function (request, sender) {
     if(request.action == "getSource"){
-        message.innerHTML = request.source;
+        message.innerText = request.source;
+        console.log(message.innerText);
         //message.innerHTML = "Success!";
     }
 });
