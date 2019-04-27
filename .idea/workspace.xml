@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="2252a50d-1f2b-4c5e-88a8-16af5f202bd8" name="Default Changelist" comment="for sam">
       <change beforePath="$PROJECT_DIR$/TLDR.js" beforeDir="false" afterPath="$PROJECT_DIR$/TLDR.js" afterDir="false" />
+=======
+    <list default="true" id="2252a50d-1f2b-4c5e-88a8-16af5f202bd8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <ignored path="$PROJECT_DIR$/node_modules/" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -23,8 +28,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TLDR.js">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="223">
               <caret line="53" column="90" lean-forward="true" selection-start-line="53" selection-start-column="90" selection-end-line="53" selection-end-column="90" />
+=======
+            <state relative-caret-position="221">
+              <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
@@ -119,7 +129,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556401470768" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556402142201" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -149,7 +159,7 @@
       <option name="presentableId" value="Default" />
       <updated>1556376998201</updated>
       <workItem from="1556377002621" duration="785000" />
-      <workItem from="1556392513866" duration="8052000" />
+      <workItem from="1556392513866" duration="8723000" />
     </task>
     <task id="LOCAL-00001" summary="added popup.html">
       <created>1556378156686</created>
@@ -179,11 +189,22 @@
       <option name="project" value="LOCAL" />
       <updated>1556400091021</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="html tags are filtered out of scraped string">
+      <created>1556401543621</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1556401543621</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< Updated upstream
     <option name="totallyTimeSpent" value="17944000" />
+=======
+    <option name="totallyTimeSpent" value="18077000" />
+>>>>>>> Stashed changes
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -239,7 +260,8 @@
     <MESSAGE value="event listener in js" />
     <MESSAGE value="basic algorithm code" />
     <MESSAGE value="Get p tag innerHTML&#10;&#10;Up next: Filter that HTML and parse it for the algorithm" />
-    <option name="LAST_COMMIT_MESSAGE" value="Get p tag innerHTML&#10;&#10;Up next: Filter that HTML and parse it for the algorithm" />
+    <MESSAGE value="html tags are filtered out of scraped string" />
+    <option name="LAST_COMMIT_MESSAGE" value="html tags are filtered out of scraped string" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
@@ -278,8 +300,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TLDR.js">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="223">
           <caret line="53" column="90" lean-forward="true" selection-start-line="53" selection-start-column="90" selection-end-line="53" selection-end-column="90" />
+=======
+        <state relative-caret-position="221">
+          <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+>>>>>>> Stashed changes
         </state>
       </provider>
     </entry>

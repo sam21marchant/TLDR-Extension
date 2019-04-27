@@ -23,10 +23,12 @@ function getThisPage() {
 
 //given a string including the whole text
 function tldr(html) {
-    var wordData = (html.split(' ')); //splits by space and converts to lowercase //removes special chars
-    var dataInSentences = html.split('.');
+    var wordData = html.split(' '); //splits by space and converts to lowercase //removes special chars
+    //var separators = ['.', '!', '?'];
+    //var reg = new RegExp(separators.join('|'), 'g');
+    var dataInSentences = html.match( /[^\.!\?]+[\.!\?]+/g );
 
-    var freqMap = new Map([]); //stores words with the # of times they're said
+    var freqMap = {}; //stores words with the # of times they're said
     var topSentence = "default"; //can be expanded to a list of sentences for TLDR to output
     var topValue = -1;
 
@@ -35,12 +37,11 @@ function tldr(html) {
         wordData[i] = wordData[i].replace(/[.,?!&:()""]/g,"");
         var key = wordData[i];
 
-        if(freqMap.has(key)) {
-            var newVal = freqMap.get(key) + 1;
-            freqMap.set(key,newVal);
+        if(key in freqMap) {
+            freqMap[key] += 1;
         }
         else {
-            freqMap.set(key, 1);
+            freqMap[key] = 1;
         }
     }
 
@@ -48,20 +49,22 @@ function tldr(html) {
     //sentence with highest point total goes in TLDR
     for(var i = 0; i < dataInSentences.length; i++) {
         var sentencePointTotal = 0;
-        var cleanedSentence = dataInSentences[i].replace(/[.,?!&:()""]/g,"");
-        cleanedSentence = cleanedSentence.toLowerCase();
-        var listOfWords = cleanedSentence.split(' '); //list of words in THIS sentence
-        for(var j = 0; j < listOfWords.length; j++) { //for each word in the list of words
-            if(freqMap.has(listOfWords[j])) {
-                sentencePointTotal += freqMap.get(listOfWords[j]); //if the word is in our map, assign freq as a point
+        if(dataInSentences[i].length !== 0) {
+            var cleanedSentence = dataInSentences[i].replace(/[.,?!&:()""]/g, "");
+            cleanedSentence = cleanedSentence.toLowerCase();
+            var listOfWords = cleanedSentence.split(' '); //list of words in THIS sentence
+            for (var j = 0; j < listOfWords.length; j++) { //for each word in the list of words
+                if (listOfWords[j] in freqMap) {
+                    sentencePointTotal += freqMap[listOfWords[j]]; //if the word is in our map, assign freq as a point
+                }
+            }
+            if (topValue === -1 || sentencePointTotal > topValue) { //there has never been a topSentence assigned or there is a higher point total sentence
+                topValue = sentencePointTotal;
+                topSentence = dataInSentences[i];
             }
         }
-        if(topValue = -1 || sentencePointTotal > topValue) { //there has never been a topSentence assigned or there is a higher point total sentence
-            topValue = sentencePointTotal;
-            topSentence = dataInSentences[i];
-        }
     }
-    return(html);
+    return(topSentence);
     //Console.log(freqMap);
 }
 
