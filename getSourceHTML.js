@@ -1,6 +1,16 @@
 // @author Rob W <http://stackoverflow.com/users/938089/rob-w>
 // Demo: var serialized_html = DOMtoString(document);
 
+function getP(document_root){
+    var ret = '';
+    var pElements = document_root.querySelectorAll("p");
+    pElements.forEach(function (value) { ret += value.innerHTML + '\n'; })
+
+    return ret;
+}
+
+
+
 function DOMtoString(document_root) {
     var html = '',
         node = document_root.firstChild;
@@ -30,5 +40,5 @@ function DOMtoString(document_root) {
 
 chrome.runtime.sendMessage({
     action: "getSource",
-    source: DOMtoString(document)
+    source: getP(document)
 });

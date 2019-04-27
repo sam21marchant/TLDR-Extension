@@ -1,36 +1,19 @@
+document.addEventListener("DOMContentLoaded", function () {
+    message = document.getElementById("URL");
+    document.getElementById("startTLDR").addEventListener("click", getThisPage);
+})
 
 chrome.runtime.onMessage.addListener(function (request, sender) {
     if(request.action == "getSource"){
         message.innerHTML = request.source;
+        //message.innerHTML = "Success!";
     }
 });
 
 
-
 function getThisPage() {
-    chrome.tabs.executeScript(null, {file: "getSourceHTML.js"}, function () {
-        if(chrome.runtime.lastError){
-            message.innerHTML = "Oops Something went wrong :(";
-        }
-    });
-
+    chrome.tabs.executeScript(null, {file: "getSourceHTML.js"});
 }
-
-window.onload = function () {
-    message = document.getElementById("URL");
-    var button = document.getElementById("startTLDR");
-
-    if (button != null){
-        button.addEventListener("click", getThisPage, false);
-    }
-}
-
-
-
-
-
-
-
 
 
 
