@@ -25,7 +25,16 @@ window.onload = function () {
     }
 }
 
-
+function testDB(){
+    const url = chrome.runtime.getURL('data/emotions.json');
+    return fetch(url, {
+  method: 'PUT',
+  body: formData
+})
+.then(response => response.json())
+.catch(error => console.error('Error:', error))
+.then(response => console.log('Success:', JSON.stringify(response)));
+}
 
 
 

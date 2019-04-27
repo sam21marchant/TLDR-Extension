@@ -10,5 +10,9 @@
     "default_popup": "popup.html"
   },
 
-  "permissions": ["tabs", "<all_urls>", "activeTab"]
+  "permissions": ["tabs", "<all_urls>", "activeTab"],
+
+  "web_accessible_resources": [
+    "data/emotions.json"
+]
 }
