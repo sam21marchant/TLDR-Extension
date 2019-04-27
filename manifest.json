@@ -1,5 +1,5 @@
 {
-  "manifest_version": 1,
+  "manifest_version": 2,
 
   "name": "Reddit TLDR Plugin",
   "description": "This will give a short summary of a Reddit post that is too long.",
@@ -7,9 +7,8 @@
 
   "browser_action": {
     "default_icon": "icon.png",
-    "default_popup": "TLDR.html"
+    "default_popup": "popup.html"
   },
-  "permissions": [
-    "activeTab"
-  ]
+
+  "permissions": ["tabs", "<all_urls>", "activeTab"]
 }

@@ -1,25 +1,38 @@
-document.addEventListener('DOMContentLoaded', function() {
-    var startButton = document.getElementById('startTLDR');
-    //fetch data
-    startButton.addEventListener('click',function() { //starts TLDR progess, write algorithm here
 
-        //var myHeading = document.querySelector('h1');
-        //myHeading.textContent = 'Hello world';
-    })
+chrome.runtime.onMessage.addListener(function (request, sender) {
+    if(request.action == "getSource"){
+        message.innerHTML = request.source;
+    }
 });
 
-function getSiteData(url) {
-    var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-    var request = new XMLHttpRequest();
-    request.onreadystatechange=function() {
-        if (this.readyState == 4 && this.status == 200) {
-            tldr(this.responseText)
-            //var webData = this.response
+
+
+function getThisPage() {
+    chrome.tabs.executeScript(null, {file: "getSourceHTML.js"}, function () {
+        if(chrome.runtime.lastError){
+            message.innerHTML = "Oops Something went wrong :(";
         }
-    };
-    request.open("GET", url, true);
-    request.send();
+    });
+
 }
+
+window.onload = function () {
+    message = document.getElementById("URL");
+    var button = document.getElementById("startTLDR");
+
+    if (button != null){
+        button.addEventListener("click", getThisPage, false);
+    }
+}
+
+
+
+
+
+
+
+
+
 
 function tldr(html) {
     var wordData = ["big", "dog", "it","is","so","big"]; //break up incoming data, split by space to get list of words
