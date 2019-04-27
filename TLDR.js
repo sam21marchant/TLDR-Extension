@@ -5,11 +5,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 chrome.runtime.onMessage.addListener(function (request, sender) {
     if(request.action == "getSource"){
-        message.innerText = request.source;
-        console.log(message.innerText);
+        //message.innerHTML = request.source;
+       // message.innerText = request.source;
+        //console.log(message.innerText);
         //message.innerHTML = "Success!";
+       message.innerHTML = "Ready? " + tldr(request.source);
     }
 });
+
 
 
 function getThisPage() {
@@ -18,23 +21,27 @@ function getThisPage() {
 
 
 
+//given a string including the whole text
 function tldr(html) {
-    var wordData = ["big", "dog", "it","is","so","big"]; //break up incoming data, split by space to get list of words
-    var dataInSentences = ["big dog.", "it is so uuge.", "people disagree it's big."];
-    var freqMap = new Map([]); //stores words with the # of times they're said
-    var badWords = ["in","a","an","the"];
+    var wordData = html.split(' '); //splits by space and converts to lowercase //removes special chars
+    //var separators = ['.', '!', '?'];
+    //var reg = new RegExp(separators.join('|'), 'g');
+    var dataInSentences = html.match( /[^\.!\?]+[\.!\?]+/g );
 
-    for(var i = 0; i < htmlData.length; i++) { //fills map with words and the frequency of them
-        var key = htmlData[i];
-        if(badWords.includes(key)) {
+    var freqMap = {}; //stores words with the # of times they're said
+    var topSentence = "default"; //can be expanded to a list of sentences for TLDR to output
+    var topValue = -1;
 
-        }
-        if(freqMap.has(key)) {
-            var newVal = freqMap.get(key) + 1;
-            freqMap.set(key,newVal);
+    for(var i = 0; i < wordData.length; i++) { //fills map with words and the frequency of them
+        wordData[i] = wordData[i].toLowerCase();
+        wordData[i] = wordData[i].replace(/[.,?!&:()""]/g,"");
+        var key = wordData[i];
+
+        if(key in freqMap) {
+            freqMap[key] += 1;
         }
         else {
-            freqMap.set(key, 1);
+            freqMap[key] = 1;
         }
     }
 
@@ -42,7 +49,22 @@ function tldr(html) {
     //sentence with highest point total goes in TLDR
     for(var i = 0; i < dataInSentences.length; i++) {
         var sentencePointTotal = 0;
-
+        if(dataInSentences[i].length !== 0) {
+            var cleanedSentence = dataInSentences[i].replace(/[.,?!&:()""]/g, "");
+            cleanedSentence = cleanedSentence.toLowerCase();
+            var listOfWords = cleanedSentence.split(' '); //list of words in THIS sentence
+            for (var j = 0; j < listOfWords.length; j++) { //for each word in the list of words
+                if (listOfWords[j] in freqMap) {
+                    sentencePointTotal += freqMap[listOfWords[j]]; //if the word is in our map, assign freq as a point
+                }
+            }
+            if (topValue === -1 || sentencePointTotal > topValue) { //there has never been a topSentence assigned or there is a higher point total sentence
+                topValue = sentencePointTotal;
+                topSentence = dataInSentences[i];
+            }
+        }
     }
-    Console.log(freqMap);
+    return(topSentence);
+    //Console.log(freqMap);
 }
+
